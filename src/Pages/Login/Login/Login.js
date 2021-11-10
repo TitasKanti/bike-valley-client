@@ -1,4 +1,4 @@
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { Button, Container, Grid, TextField, Typography, CircularProgress, Alert } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
@@ -6,7 +6,7 @@ import login from '../../../images/loginimg.jpg';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
-    const { loginUser } = useAuth();
+    const { user, loginUser, loading, authError } = useAuth();
 
     const handleOnChange = e => {
         const field = e.target.name;
@@ -18,7 +18,8 @@ const Login = () => {
     }
 
     const handleLogin = e => {
-        loginUser();
+        loginUser(loginData.email, loginData.password);
+        e.target.reset();
         e.preventDefault();
     }
     return (
@@ -28,7 +29,8 @@ const Login = () => {
                     <Typography variant="h5" gutterBottom>
                         Login
                     </Typography>
-                    <form onSubmit={handleLogin}>
+
+                    {!loading && <form onSubmit={handleLogin}>
                         <TextField
                             sx={{ width: '75%', m: 1 }}
                             id="standard-basic"
@@ -49,7 +51,16 @@ const Login = () => {
                         <NavLink style={{ textDecoration: 'none' }} to="/register">
                             <Button variant='text'>New User? Please Register</Button>
                         </NavLink>
-                    </form>
+                    </form>}
+                    {
+                        loading && <CircularProgress />
+                    }
+                    {
+                        user?.email && <Alert severity="success">Login Successfull!</Alert>
+                    }
+                    {
+                        authError && <Alert severity="error">{authError}</Alert>
+                    }
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <img style={{ width: '100%' }} src={login} alt='login' />

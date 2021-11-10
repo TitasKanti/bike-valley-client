@@ -7,35 +7,32 @@ initializeFirebase();
 
 const useFirebase = () => {
     const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [authError, setAuthError] = useState('');
 
     const auth = getAuth();
 
     const registerUser = (email, password) => {
+        setLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                // ...
+                setAuthError('');
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
-            });
+                setAuthError(error.message);
+            })
+            .finally(() => setLoading(false));
     }
 
     const loginUser = (email, password) => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                // ...
+                setAuthError('');
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            });
-
+                setAuthError(error.message);
+            })
+            .finally(() => setLoading(false));
     }
 
     //state observer
@@ -47,6 +44,7 @@ const useFirebase = () => {
             else {
                 setUser({})
             }
+            setLoading(false)
         });
         return () => unsubscribe;
     }, [])
@@ -57,14 +55,17 @@ const useFirebase = () => {
                 // Sign-out successful.
             }).catch((error) => {
                 // An error happened.
-            });
+            })
+            .finally(() => setLoading(false));
     }
 
     return {
         user,
+        loading,
         registerUser,
         loginUser,
-        logOut
+        logOut,
+        authError
     }
 }
 

@@ -1,4 +1,4 @@
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { Button, Container, Grid, TextField, Typography, CircularProgress, Alert } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
@@ -6,7 +6,8 @@ import login from '../../../images/loginimg.jpg';
 
 const Register = () => {
     const [signupData, setSignupData] = useState({});
-    const { registerUser } = useAuth();
+
+    const { user, registerUser, loading, authError } = useAuth();
 
     const handleOnChange = e => {
         const field = e.target.name;
@@ -35,36 +36,48 @@ const Register = () => {
                     <Typography variant="h5" gutterBottom>
                         Register
                     </Typography>
-                    <form onSubmit={handleRegistration}>
-                        <TextField
-                            sx={{ width: '75%', m: 1 }}
-                            id="standard-basic"
-                            label="Your Email"
-                            name="email"
-                            onChange={handleOnChange}
-                            variant="standard" />
-                        <TextField
-                            sx={{ width: '75%', m: 1 }}
-                            id="standard-basic"
-                            label="Your Password"
-                            type="password"
-                            name="password"
-                            onChange={handleOnChange}
-                            variant="standard" />
-                        <TextField
-                            sx={{ width: '75%', m: 1 }}
-                            id="standard-basic"
-                            label="Your Password"
-                            type="password"
-                            name="password2"
-                            onChange={handleOnChange}
-                            variant="standard" />
 
-                        <Button sx={{ width: '75%', m: 1 }} type="submit" variant="contained">Register</Button>
-                        <NavLink style={{ textDecoration: 'none' }} to="/login">
-                            <Button variant='text'>Already have an account? Please Login</Button>
-                        </NavLink>
-                    </form>
+                    {
+                        !loading && <form onSubmit={handleRegistration}>
+                            <TextField
+                                sx={{ width: '75%', m: 1 }}
+                                id="standard-basic"
+                                label="Your Email"
+                                name="email"
+                                onChange={handleOnChange}
+                                variant="standard" />
+                            <TextField
+                                sx={{ width: '75%', m: 1 }}
+                                id="standard-basic"
+                                label="Your Password"
+                                type="password"
+                                name="password"
+                                onChange={handleOnChange}
+                                variant="standard" />
+                            <TextField
+                                sx={{ width: '75%', m: 1 }}
+                                id="standard-basic"
+                                label="Your Password"
+                                type="password"
+                                name="password2"
+                                onChange={handleOnChange}
+                                variant="standard" />
+
+                            <Button sx={{ width: '75%', m: 1 }} type="submit" variant="contained">Register</Button>
+                            <NavLink style={{ textDecoration: 'none' }} to="/login">
+                                <Button variant='text'>Already have an account? Please Login</Button>
+                            </NavLink>
+                        </form>
+                    }
+                    {
+                        loading && <CircularProgress />
+                    }
+                    {
+                        user?.email && <Alert severity="success">Successfully Registered!</Alert>
+                    }
+                    {
+                        authError && <Alert severity="error">{authError}</Alert>
+                    }
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <img style={{ width: '100%' }} src={login} alt='login' />
