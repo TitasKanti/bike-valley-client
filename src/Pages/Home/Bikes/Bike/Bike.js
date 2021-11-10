@@ -10,7 +10,7 @@ const Bike = ({ bike }) => {
     const { img, name, price, detail } = bike;
     return (
         <Grid item xs={12} md={4}>
-            <Card sx={{ maxWidth: 300 }}>
+            <Card sx={{ maxWidth: 300, m: '0 auto' }}>
                 <CardActionArea>
                     <CardMedia
                         component="img"

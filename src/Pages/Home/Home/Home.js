@@ -18,7 +18,7 @@ const Home = () => {
             <Navigation></Navigation>
             <Banner></Banner>
 
-            {/* products section */}
+            {/* Featured bike home section */}
             <Typography sx={{ my: 5, color: 'info.main' }} variant="h3">
                 Featured Bikes
             </Typography>
