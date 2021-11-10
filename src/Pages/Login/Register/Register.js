@@ -1,10 +1,12 @@
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 import login from '../../../images/loginimg.jpg';
 
 const Register = () => {
     const [signupData, setSignupData] = useState({});
+    const { registerUser } = useAuth();
 
     const handleOnChange = e => {
         const field = e.target.name;
@@ -22,6 +24,7 @@ const Register = () => {
             e.preventDefault();
             return;
         }
+        registerUser(signupData.email, signupData.password);
         e.target.reset()
         e.preventDefault();
     }

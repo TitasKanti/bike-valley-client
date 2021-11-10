@@ -1,10 +1,12 @@
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 import login from '../../../images/loginimg.jpg';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
+    const { loginUser } = useAuth();
 
     const handleOnChange = e => {
         const field = e.target.name;
@@ -16,7 +18,7 @@ const Login = () => {
     }
 
     const handleLogin = e => {
-
+        loginUser();
         e.preventDefault();
     }
     return (
