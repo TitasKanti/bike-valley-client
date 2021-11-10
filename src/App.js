@@ -2,11 +2,10 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import './App.css';
-import Bikes from "./Pages/Home/Bikes/Bikes";
+import Bikes from "./Pages/Home/Bikes/Bikes/Bikes";
 import Home from "./Pages/Home/Home/Home";
 import Login from "./Pages/Login/Login/Login";
 import Register from "./Pages/Login/Register/Register";
