@@ -1,13 +1,13 @@
-import { Grid } from '@mui/material';
 import React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Button, CardActionArea, CardActions, CardMedia, CardContent, Card, Grid, Typography } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 
 const Bike = ({ bike }) => {
-    const { img, name, price, detail } = bike;
+    const { img, name, price, detail, _id } = bike;
+    const history = useHistory();
+    const handlePurchase = id => {
+        history.push(`/purchase/${id}`);
+    }
     return (
         <Grid item xs={12} md={4}>
             <Card sx={{ maxWidth: 300, m: '0 auto' }}>
@@ -31,7 +31,7 @@ const Bike = ({ bike }) => {
                     Price: {price}
                 </Button>
                 <CardActions>
-                    <Button size="small" color="primary">Buy Now</Button>
+                    <Button onClick={() => handlePurchase(_id)} size="small" color="primary">Buy Now</Button>
                 </CardActions>
             </Card>
         </Grid>

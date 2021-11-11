@@ -8,7 +8,9 @@ import './App.css';
 import AuthProvider from "./contexts/AuthProvider/AuthProvider";
 import Bikes from "./Pages/Home/Bikes/Bikes/Bikes";
 import Home from "./Pages/Home/Home/Home";
+import Purchase from "./Pages/Home/Purchase/Purchase/Purchase";
 import Login from "./Pages/Login/Login/Login";
+import PrivateRoute from "./Pages/Login/PrivateRoute/PrivateRoute";
 import Register from "./Pages/Login/Register/Register";
 
 function App() {
@@ -26,6 +28,9 @@ function App() {
             <Route path="/bikes">
               <Bikes />
             </Route>
+            <PrivateRoute path="/purchase/:id">
+              <Purchase />
+            </PrivateRoute>
             <Route path="/home">
               <Home />
             </Route>

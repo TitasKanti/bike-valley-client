@@ -8,7 +8,7 @@ const Home = () => {
     const [bikes, setBikes] = useState([]);
 
     useEffect(() => {
-        fetch('/fakeData.json')
+        fetch('http://localhost:5000/bikes')
             .then(res => res.json())
             .then(data => setBikes(data))
     }, [])
@@ -26,7 +26,7 @@ const Home = () => {
 
                 {
                     bikes.slice(0, 6).map(bike => <Bike
-                        key={bike.id}
+                        key={bike._id}
                         bike={bike}
                     >
                     </Bike>)
