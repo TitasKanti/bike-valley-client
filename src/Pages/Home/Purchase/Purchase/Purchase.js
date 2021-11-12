@@ -26,7 +26,7 @@ const Purchase = () => {
     const handleSubmit = e => {
         const newOrder = { ...order, status: 'pending', userName: user?.displayName, email: user?.email };
         //new order sending to the server
-        fetch('http://localhost:5000/orders', {
+        fetch('https://morning-ocean-94210.herokuapp.com/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

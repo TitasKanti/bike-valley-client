@@ -1,6 +1,5 @@
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -9,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { makeStyles } from '@mui/styles';
-import { useTheme } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -64,22 +63,25 @@ const Navigation = () => {
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                             Bike Valley
                         </Typography>
-                        <Box className={navItemContainer}>
+                        <span className={navItemContainer}>
                             <NavLink className={navItem} to="/bikes">
                                 <Button color="inherit">Explore</Button>
                             </NavLink>
                             {
                                 user?.email ?
-                                    <Box>
-                                        <Typography style={{ color: 'yellow' }} variant="div">{user.displayName}</Typography>
+                                    <span>
+                                        <NavLink className={navItem} to="/dashboard">
+                                            <Button color="inherit"> Dashboard </Button>
+                                        </NavLink>
+                                        <Typography style={{ color: 'yellow' }} variant="span"> {user.displayName} </Typography>
                                         <Button onClick={logOut} color="inherit">Logout</Button>
-                                    </Box>
+                                    </span>
                                     :
                                     <NavLink className={navItem} to="/login">
                                         <Button color="inherit">Login</Button>
                                     </NavLink>
                             }
-                        </Box>
+                        </span>
                     </Toolbar>
                 </AppBar>
             </Box>
@@ -90,7 +92,7 @@ const Navigation = () => {
                         open={state}
                         onClose={() => setState(false)}
                     >
-                        <Box
+                        <span
                             sx={{ width: 250 }}
                             role="presentation"
 
@@ -118,10 +120,9 @@ const Navigation = () => {
                                     <ListItemText>
                                         {
                                             user?.email ?
-                                                <Box>
-                                                    <Typography style={{ color: 'blue' }} variant="div">{user.displayName}</Typography>
-                                                    <Button onClick={logOut} color="inherit">Logout</Button>
-                                                </Box>
+                                                <NavLink className={mobileNavItem} to="/dashboard">
+                                                    <Button color="inherit"> Dashboard </Button>
+                                                </NavLink>
                                                 :
                                                 <NavLink className={mobileNavItem} to="/login">
                                                     <Button color="inherit">Login</Button>
@@ -130,8 +131,20 @@ const Navigation = () => {
                                     </ListItemText>
                                 </ListItem>
                                 <Divider />
+                                <ListItem button>
+                                    <ListItemText>
+                                        {
+                                            user?.email &&
+                                            <Box>
+                                                <Typography style={{ color: 'blue' }} variant="div">{user.displayName}</Typography>
+                                                <Button onClick={logOut} color="inherit">Logout</Button>
+                                            </Box>
+                                        }
+                                    </ListItemText>
+                                </ListItem>
+                                <Divider />
                             </List>
-                        </Box>
+                        </span>
                     </Drawer>
                 </React.Fragment>
             </div>

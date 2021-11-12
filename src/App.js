@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 import './App.css';
 import AuthProvider from "./contexts/AuthProvider/AuthProvider";
+import Dashboard from "./Pages/Dashboard/Dashboard/Dashboard";
+import MyOrders from "./Pages/Dashboard/MyOrders/MyOrders";
 import Bikes from "./Pages/Home/Bikes/Bikes/Bikes";
 import Home from "./Pages/Home/Home/Home";
 import Purchase from "./Pages/Home/Purchase/Purchase/Purchase";
@@ -30,6 +32,9 @@ function App() {
             </Route>
             <PrivateRoute path="/purchase/:id">
               <Purchase />
+            </PrivateRoute>
+            <PrivateRoute path="/dashboard">
+              <Dashboard />
             </PrivateRoute>
             <Route path="/home">
               <Home />

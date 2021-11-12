@@ -36,7 +36,6 @@ const Login = () => {
                     {!loading && <form onSubmit={handleLogin}>
                         <TextField
                             sx={{ width: '75%', m: 1 }}
-                            id="standard-basic"
                             label="Your Email"
                             type="email"
                             name="email"
@@ -44,7 +43,6 @@ const Login = () => {
                             variant="standard" />
                         <TextField
                             sx={{ width: '75%', m: 1 }}
-                            id="standard-basic"
                             label="Your Password"
                             type="password"
                             name="password"
