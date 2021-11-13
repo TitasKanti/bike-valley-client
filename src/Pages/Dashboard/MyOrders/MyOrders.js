@@ -17,7 +17,9 @@ const MyOrders = () => {
     useEffect(() => {
         fetch(`https://morning-ocean-94210.herokuapp.com/orders?email=${user.email}`)
             .then(res => res.json())
-            .then(data => setOrders(data))
+            .then(data => {
+                setOrders(data)
+            })
     }, [user.email])
 
     //DELETE ORDER
@@ -38,11 +40,6 @@ const MyOrders = () => {
         }
     }
 
-    //UPDATE ORDER
-    const handleUpdateOrder = (id) => {
-
-    }
-
     return (
         <Box>
             <Typography variant='h5'>My Orders: {orders?.length}</Typography>
@@ -53,8 +50,7 @@ const MyOrders = () => {
                             <TableCell>Name</TableCell>
                             <TableCell align="right">Model</TableCell>
                             <TableCell align="right">Price</TableCell>
-                            <TableCell align="right">Status</TableCell>
-                            <TableCell align="right">Cancel</TableCell>
+                            <TableCell align="right">Cancel Order</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -64,13 +60,11 @@ const MyOrders = () => {
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {order.name}
+                                    {order?.name}
                                 </TableCell>
-                                <TableCell align="right">{order.model}</TableCell>
-                                <TableCell align="right">{order.price}</TableCell>
-                                <TableCell align="right">
-                                    <Button variant='contained' onClick={() => handleUpdateOrder(order?._id)}> {order.status} </Button>
-                                </TableCell>
+                                <TableCell align="right">{order?.model}</TableCell>
+                                <TableCell align="right">{order?.price}</TableCell>
+
                                 <TableCell align="right">
                                     <Button variant='contained' onClick={() => handleCancelOrder(order?._id)}> X </Button>
                                 </TableCell>

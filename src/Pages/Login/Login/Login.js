@@ -7,7 +7,7 @@ import login from '../../../images/loginimg.jpg';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
-    const { user, loginUser, loading, authError } = useAuth();
+    const { user, loginUser, signInWithGoogle, loading, authError } = useAuth();
     const location = useLocation();
     const history = useHistory();
 
@@ -25,6 +25,11 @@ const Login = () => {
         e.target.reset();
         e.preventDefault();
     }
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle(location, history)
+    }
+
     return (
         <Container>
             <Grid container spacing={2}>
@@ -53,6 +58,8 @@ const Login = () => {
                         <NavLink style={{ textDecoration: 'none' }} to="/register">
                             <Button variant='text'>New User? Please Register</Button>
                         </NavLink>
+                        <p>-------------------- or --------------------</p>
+                        <Button sx={{ width: '75%', m: 1 }} onClick={handleGoogleSignIn} variant="contained">Google Sign In</Button>
                     </form>}
                     {
                         loading && <CircularProgress />
