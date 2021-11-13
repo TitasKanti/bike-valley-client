@@ -17,9 +17,9 @@ const Purchase = () => {
     const handleOnBlur = e => {
         const field = e.target.name;
         const value = e.target.value;
-        const newOrder = { ...order };
+        const newOrder = { ...order, status: 'pending' };
         newOrder[field] = value;
-        setOrder(newOrder);
+        setOrder(newOrder); console.log(newOrder);
         e.preventDefault();
     }
 

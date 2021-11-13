@@ -1,5 +1,6 @@
 import { Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import Navigation from '../../../Shared/Navigation/Navigation';
 import Bike from '../Bike/Bike';
 
 const Bikes = () => {
@@ -12,6 +13,7 @@ const Bikes = () => {
     }, [])
     return (
         <>
+            <Navigation></Navigation>
             <Typography sx={{ my: 5, color: 'info.main' }} variant="h3">
                 Featured Bikes
             </Typography>

@@ -6,22 +6,29 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { BrowserRouter as Router, Switch, Route, Link, useParams, useRouteMatch } from "react-router-dom";
+import { Button } from '@mui/material';
+import DashboardHome from '../DashboardHome/DashboardHome';
+import MakeAdmin from '../MakeAdmin/MakeAdmin';
+import AddBike from '../AddBike/AddBike';
+import useAuth from '../../../hooks/useAuth';
+import AdminRoute from '../../Login/AdminRoute/AdminRoute';
+import Pay from '../Pay/Pay';
+import Review from '../Review/Review';
 import MyOrders from '../MyOrders/MyOrders';
+import ManageAllOrders from '../ManageAllOrders/ManageAllOrders';
 
 const drawerWidth = 240;
 
 const Dashboard = (props) => {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    let { path, url } = useRouteMatch();
+    const { admin, logOut } = useAuth();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -31,16 +38,40 @@ const Dashboard = (props) => {
         <div>
             <Toolbar />
             <Divider />
-            <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
+            <List style={{ display: 'flex', flexDirection: 'column' }}>
+                <Link style={{ textDecoration: 'none' }} to="/home"><Button color="inherit"> Home </Button></Link>
+                <Divider />
+
+                {admin ? <Box style={{ display: 'flex', flexDirection: 'column' }}>
+                    <Link style={{ textDecoration: 'none' }} to={`${url}/manageAllOrders`}><Button color="inherit"> Manage Orders</Button></Link>
+                    <Divider />
+
+                    <Link style={{ textDecoration: 'none' }} to={`${url}/makeAdmin`}><Button color="inherit"> Make Admin </Button></Link>
+                    <Divider />
+
+                    <Link style={{ textDecoration: 'none' }} to={`${url}/addBike`}><Button color="inherit"> Add Bike </Button></Link>
+                    <Divider />
+                </Box>
+                    :
+                    <Box>
+                        <Link style={{ textDecoration: 'none' }} to={`${url}`}><Button color="inherit"> Dashboard </Button></Link>
+                        <Divider />
+
+                        <Link style={{ textDecoration: 'none' }} to={`${url}/myOrders`}><Button color="inherit"> My Orders </Button></Link>
+                        <Divider />
+
+                        <Link style={{ textDecoration: 'none' }} to={`${url}/review`}><Button color="inherit"> Review </Button></Link>
+                        <Divider />
+
+                        <Link style={{ textDecoration: 'none' }} to={`${url}/payment`}><Button color="inherit"> Payment </Button></Link>
+                        <Divider />
+                    </Box>}
+                <Divider />
+
+                <Button onClick={logOut} color="inherit">Logout</Button>
+                <Divider />
             </List>
+
         </div>
     );
 
@@ -108,9 +139,29 @@ const Dashboard = (props) => {
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
-                <Typography paragraph>
-                    <MyOrders />
-                </Typography>
+                <Switch>
+                    <Route exact path={path}>
+                        <DashboardHome></DashboardHome>
+                    </Route>
+                    <Route path={`${path}/review`}>
+                        <Review></Review>
+                    </Route>
+                    <Route path={`${path}/payment`}>
+                        <Pay></Pay>
+                    </Route>
+                    <Route path={`${path}/myOrders`}>
+                        <MyOrders></MyOrders>
+                    </Route>
+                    <AdminRoute path={`${path}/manageAllOrders`}>
+                        <ManageAllOrders></ManageAllOrders>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/makeAdmin`}>
+                        <MakeAdmin></MakeAdmin>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/addBike`}>
+                        <AddBike></AddBike>
+                    </AdminRoute>
+                </Switch>
             </Box>
         </Box>
     );
