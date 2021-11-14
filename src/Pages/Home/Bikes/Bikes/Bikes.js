@@ -1,5 +1,6 @@
-import { Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import Footer from '../../../Shared/Footer/Footer';
 import Navigation from '../../../Shared/Navigation/Navigation';
 import Bike from '../Bike/Bike';
 
@@ -27,6 +28,9 @@ const Bikes = () => {
                     </Bike>)
                 }
             </Grid>
+            <Box>
+                <Footer></Footer>
+            </Box>
         </>
     );
 };

@@ -8,7 +8,7 @@ const AddBike = () => {
     const onSubmit = data => {
         console.log(data);
 
-        fetch('http://localhost:5000/bikes', {
+        fetch('https://morning-ocean-94210.herokuapp.com/bikes', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -8,7 +8,7 @@ const LoadOrders = ({ allOrder, handleCancelOrder }) => {
     const [disable, setDisable] = useState(false)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/${_id}`)
+        fetch(`https://morning-ocean-94210.herokuapp.com/orders/${_id}`)
             .then(res => res.json())
             .then(data => setOrder(data))
     }, [_id])
@@ -22,7 +22,7 @@ const LoadOrders = ({ allOrder, handleCancelOrder }) => {
     }
 
     const handleUpdateStatus = id => {
-        const url = `http://localhost:5000/orders/${_id}`;
+        const url = `https://morning-ocean-94210.herokuapp.com/orders/${_id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
