@@ -6,7 +6,7 @@ const LoadOrders = ({ allOrder, handleCancelOrder }) => {
     const { name, _id, model, price, userName } = allOrder;
     const [order, setOrder] = useState({});
     const [disable, setDisable] = useState(false)
-    console.log(order)
+
     useEffect(() => {
         fetch(`http://localhost:5000/orders/${_id}`)
             .then(res => res.json())

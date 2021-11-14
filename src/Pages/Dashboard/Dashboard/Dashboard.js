@@ -21,6 +21,7 @@ import Pay from '../Pay/Pay';
 import Review from '../Review/Review';
 import MyOrders from '../MyOrders/MyOrders';
 import ManageAllOrders from '../ManageAllOrders/ManageAllOrders';
+import ManageProducts from '../ManageProducts/ManageProducts/ManageProducts';
 
 const drawerWidth = 240;
 
@@ -39,11 +40,13 @@ const Dashboard = (props) => {
             <Toolbar />
             <Divider />
             <List style={{ display: 'flex', flexDirection: 'column' }}>
-                <Link style={{ textDecoration: 'none' }} to="/home"><Button color="inherit"> Home </Button></Link>
+                <Link style={{ textDecoration: 'none', backgroundColor: 'gray', color: 'white' }} to="/home"><Button color="inherit"> Home </Button></Link>
                 <Divider />
 
-                {admin ? <Box style={{ display: 'flex', flexDirection: 'column' }}>
+                {admin ? <Box style={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
                     <Link style={{ textDecoration: 'none' }} to={`${url}/manageAllOrders`}><Button color="inherit"> Manage Orders</Button></Link>
+                    <Divider />
+                    <Link style={{ textDecoration: 'none' }} to={`${url}/manageProducts`}><Button color="inherit"> Manage Products</Button></Link>
                     <Divider />
 
                     <Link style={{ textDecoration: 'none' }} to={`${url}/makeAdmin`}><Button color="inherit"> Make Admin </Button></Link>
@@ -154,6 +157,9 @@ const Dashboard = (props) => {
                     </Route>
                     <AdminRoute path={`${path}/manageAllOrders`}>
                         <ManageAllOrders></ManageAllOrders>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageProducts`}>
+                        <ManageProducts></ManageProducts>
                     </AdminRoute>
                     <AdminRoute path={`${path}/makeAdmin`}>
                         <MakeAdmin></MakeAdmin>

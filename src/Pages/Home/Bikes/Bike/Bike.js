@@ -23,7 +23,7 @@ const Bike = ({ bike }) => {
                             {name}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            {detail.slice(0, 100)}...
+                            {detail?.slice(0, 100)}...
                         </Typography>
                     </CardContent>
                 </CardActionArea>

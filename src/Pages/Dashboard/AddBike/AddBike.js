@@ -1,9 +1,40 @@
 import React from 'react';
+import { useForm } from "react-hook-form";
+import './AddBike.css';
 
 const AddBike = () => {
+    const { register, handleSubmit, reset } = useForm();
+
+    const onSubmit = data => {
+        console.log(data);
+
+        fetch('http://localhost:5000/bikes', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    alert('added successfully');
+                    reset();
+                }
+            })
+    }
+
     return (
-        <div>
-            <h2>Add a Bike</h2>
+        <div className="add-service">
+            <h2>Please Add a Service</h2>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <input {...register("name", { required: true, maxLength: 20 })} placeholder="Bike Name" />
+                <textarea {...register("detail")} placeholder="Description" />
+                <input type="number" {...register("model")} placeholder="model" />
+                <input type="number" {...register("price")} placeholder="price" />
+                <input {...register("img")} placeholder="image url" />
+                <input type="submit" />
+            </form>
         </div>
     );
 };

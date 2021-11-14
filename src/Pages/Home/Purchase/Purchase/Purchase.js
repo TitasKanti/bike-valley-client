@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Button, CardActionArea, CardActions, CardMedia, CardContent, Card, Grid, Typography, Container, TextField, Box } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
 import useAuth from '../../../../hooks/useAuth';
+import { useHistory } from 'react-router-dom';
 
 const Purchase = () => {
     const { id } = useParams();
     const [order, setOrder] = useState({});
     const { user } = useAuth();
+    const history = useHistory();
 
     useEffect(() => {
         fetch(`https://morning-ocean-94210.herokuapp.com/bikes/${id}`)
@@ -19,7 +21,7 @@ const Purchase = () => {
         const value = e.target.value;
         const newOrder = { ...order, status: 'pending' };
         newOrder[field] = value;
-        setOrder(newOrder); console.log(newOrder);
+        setOrder(newOrder);
         e.preventDefault();
     }
 
@@ -37,6 +39,7 @@ const Purchase = () => {
             .then(data => {
                 if (data.insertedId) {
                     alert('Successfully placed the order')
+                    history.push('/dashboard/myOrders')
                 }
             })
         e.preventDefault();
