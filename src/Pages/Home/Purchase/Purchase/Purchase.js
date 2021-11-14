@@ -12,7 +12,7 @@ const Purchase = () => {
         fetch(`https://morning-ocean-94210.herokuapp.com/bikes/${id}`)
             .then(res => res.json())
             .then(data => setOrder(data))
-    }, [])
+    }, [id])
 
     const handleOnBlur = e => {
         const field = e.target.name;

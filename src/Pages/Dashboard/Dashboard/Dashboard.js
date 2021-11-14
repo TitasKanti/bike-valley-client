@@ -10,7 +10,7 @@ import List from '@mui/material/List';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { BrowserRouter as Router, Switch, Route, Link, useParams, useRouteMatch } from "react-router-dom";
+import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import { Button } from '@mui/material';
 import DashboardHome from '../DashboardHome/DashboardHome';
 import MakeAdmin from '../MakeAdmin/MakeAdmin';

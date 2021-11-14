@@ -50,6 +50,7 @@ const MyOrders = () => {
                             <TableCell>Name</TableCell>
                             <TableCell align="right">Model</TableCell>
                             <TableCell align="right">Price</TableCell>
+                            <TableCell align="right">Status</TableCell>
                             <TableCell align="right">Cancel Order</TableCell>
                         </TableRow>
                     </TableHead>
@@ -64,6 +65,7 @@ const MyOrders = () => {
                                 </TableCell>
                                 <TableCell align="right">{order?.model}</TableCell>
                                 <TableCell align="right">{order?.price}</TableCell>
+                                <TableCell align="right">{order?.status}</TableCell>
 
                                 <TableCell align="right">
                                     <Button variant='contained' onClick={() => handleCancelOrder(order?._id)}> X </Button>

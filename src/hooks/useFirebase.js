@@ -76,7 +76,7 @@ const useFirebase = () => {
             setLoading(false)
         });
         return () => unsubscribe;
-    }, [])
+    }, [auth])
 
     //Loading users to check admin
     useEffect(() => {

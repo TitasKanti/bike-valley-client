@@ -1,6 +1,4 @@
-import { Typography } from '@mui/material';
 import React from 'react';
-import MyOrders from '../MyOrders/MyOrders';
 
 const DashboardHome = () => {
     return (

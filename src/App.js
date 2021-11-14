@@ -7,7 +7,6 @@ import {
 import './App.css';
 import AuthProvider from "./contexts/AuthProvider/AuthProvider";
 import Dashboard from "./Pages/Dashboard/Dashboard/Dashboard";
-import MyOrders from "./Pages/Dashboard/MyOrders/MyOrders";
 import Bikes from "./Pages/Home/Bikes/Bikes/Bikes";
 import Home from "./Pages/Home/Home/Home";
 import Purchase from "./Pages/Home/Purchase/Purchase/Purchase";
