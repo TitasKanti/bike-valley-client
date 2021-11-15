@@ -1,10 +1,11 @@
-import { Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Footer from '../../Shared/Footer/Footer';
 import Navigation from '../../Shared/Navigation/Navigation';
 import Banner from '../Banner/Banner';
 import Bike from '../Bikes/Bike/Bike';
 import UserReviews from '../UserReviews/UserReviews';
+import ExtraPart from './ExtraPart/ExtraPart/ExtraPart';
 
 const Home = () => {
     const [bikes, setBikes] = useState([]);
@@ -34,6 +35,12 @@ const Home = () => {
                     </Bike>)
                 }
             </Grid>
+
+
+            <Box
+                sx={{ py: 5 }}>
+                <ExtraPart></ExtraPart>
+            </Box>
 
             <Container>
                 <UserReviews></UserReviews>
